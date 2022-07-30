@@ -24,30 +24,36 @@ export default class App extends Component {
     {
       id:"1",
       title:"공부하기",
-      completed:false
+      completed:false,
     },
     {
       id:"2",
       title:"청소하기",
-      completed:false
+      completed:false,
     },
     {
       id:"3",
       title:"메모하기",
-      completed:false
+      completed:false,
     },
     {
       id:"4",
       title:"장보기",
-      completed:false
+      completed:false,
     },
     {
       id:"5",
       title:"차트분석하기",
-      completed:false
+      completed:false,
     },
+  ];
 
-  ]
+  handleClick = (id) => {
+    let newTodoData = this.todoData.filter(data => data.id !== id)
+    console.log('newTodoData', newTodoData)
+
+
+  }
 
   render(){
     return(
@@ -60,8 +66,8 @@ export default class App extends Component {
       {this.todoData.map((data) => (
           <div style={this.getStyle()} key={data.id} >
             <input type="checkbox" defaultChecked={false} />
-            {data.title}
-            <button style={this.btnStyle}>X</button>
+              {data.title}
+            <button style={this.btnStyle} onClick={() => this.handleClick(data.id)}>X</button>
           </div>
         
         ))}
