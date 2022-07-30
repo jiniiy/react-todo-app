@@ -1,26 +1,10 @@
 import React, {Component} from "react";
 import "./App.css";
 export default class App extends Component {
-  btnStyle = {
-    color: "#fff",
-    border: "none",
-    padding: "5px 9px",
-    borderRadius: "50%",
-    cursor:"pointer",
-    float:"right"
-  }
 
-  getStyle = () =>{
-    return {
-      padding: "10px",
-      borderBottom: "1px #ccc dotted",
-      textDecoration: 'none'
-    }
-
-  }
-
-  //dummy data
-  todoData = [
+  state = {
+    //dummy data
+  todoData : [
     {
       id:"1",
       title:"공부하기",
@@ -46,13 +30,33 @@ export default class App extends Component {
       title:"차트분석하기",
       completed:false,
     },
-  ];
+  ]
 
+
+  }
+
+  btnStyle = {
+    color: "#fff",
+    border: "none",
+    padding: "5px 9px",
+    borderRadius: "50%",
+    cursor:"pointer",
+    float:"right"
+  }
+
+  getStyle = () =>{
+    return {
+      padding: "10px",
+      borderBottom: "1px #ccc dotted",
+      textDecoration: 'none'
+    }
+  }
+  
   handleClick = (id) => {
-    let newTodoData = this.todoData.filter(data => data.id !== id)
+    let newTodoData = this.state.todoData.filter(data => data.id !== id)
     console.log('newTodoData', newTodoData)
-
-
+    
+    this.setState({ todoData: newTodoData })
   }
 
   render(){
@@ -63,7 +67,7 @@ export default class App extends Component {
             <h1>할 일 목록</h1>
           </div>
 
-      {this.todoData.map((data) => (
+      {this.state.todoData.map((data) => (
           <div style={this.getStyle()} key={data.id} >
             <input type="checkbox" defaultChecked={false} />
               {data.title}
