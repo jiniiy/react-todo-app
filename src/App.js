@@ -21,14 +21,17 @@ export default function App() {
       textDecoration: completed ? "line-through" : "none",
     }
   }
-  
-  const handleClick = (id) => {
+  //X버튼 누르면 시행
+  const clickDeleteButton = (id) => {
+    //기존 할일 리스트에 배열 형태로 넣어주기
     let newTodoData = todoData.filter(data => data.id !== id)
+    console.log(newTodoData)
     setTodoData(newTodoData)
   };
-
-  const handleChange = (e) => {
+  //할일 입력
+  const inputList = (e) => {
     setValue(e.target.value);
+    console.log(e.target.value)
   };
 
   const handSubmit = (e) => {
@@ -46,15 +49,18 @@ export default function App() {
     setTodoData((prev) => [...prev, newTodo]);
     setValue("");
   };
-
+  //체크박스에 체크넣기
   const handleCompleteChange = (id) => {
     let newTodoData = todoData.map(data => {
+      console.log("1" + data )
       if(data.id === id) {
         data.completed = !data.completed;
       }
       return data;
     });
+    //기존 할일 목록 리스트에 새로 넣어준 배열을 갱신해주기
     setTodoData(newTodoData);
+    console.log("2" + newTodoData )
   };
 
  
@@ -74,7 +80,7 @@ export default function App() {
               {data.title}
             <button 
             style={btnStyle}
-             onClick={() => handleClick(data.id)}
+             onClick={() => clickDeleteButton(data.id)}
             >
               X
             </button>
@@ -88,7 +94,7 @@ export default function App() {
                 style={{ flex: '10', padding: '5px'}}
                 placeholder= "해야 할 일을 입력하세요."
                 value= {value}     //state관리할 부분
-                onChange={handleChange}
+                onChange={inputList}
 
               />
               <input
