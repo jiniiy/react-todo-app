@@ -11,7 +11,7 @@ export default function List({ todoData, setTodoData }) {
         cursor:"pointer",
         float:"right"
       }
-      
+
     //체크박스에 체크넣기
     const handleCompleteChange = (id) => {
         let newTodoData = todoData.map(data => {
@@ -25,7 +25,7 @@ export default function List({ todoData, setTodoData }) {
         setTodoData(newTodoData);
         console.log("2" + newTodoData )
     };
-
+    
     const getStyle = (completed) =>{
         return {
           padding: "10px",
