@@ -3,15 +3,6 @@ import React from 'react'
 export default function List({ todoData, setTodoData }) {
     //const[todoData, setTodoData] = useState([]); 직접 부모state함수를가져오기보단,
 
-    const btnStyle = {
-        color: "#fff",
-        border: "none",
-        padding: "5px 9px",
-        borderRadius: "50%",
-        cursor:"pointer",
-        float:"right"
-      }
-
     //체크박스에 체크넣기
     const handleCompleteChange = (id) => {
         let newTodoData = todoData.map(data => {
@@ -26,13 +17,6 @@ export default function List({ todoData, setTodoData }) {
         console.log("2" + newTodoData )
     };
     
-    const getStyle = (completed) =>{
-        return {
-          padding: "10px",
-          borderBottom: "1px #ccc dotted",
-          textDecoration: completed ? "line-through" : "none",
-        }
-      }
       //X버튼 누르면 시행
       const clickDeleteButton = (id) => {
         //기존 할일 리스트에 배열 형태로 넣어주기
@@ -44,18 +28,24 @@ export default function List({ todoData, setTodoData }) {
     return(
         <div>
             {todoData.map((data) => (
-          <div style={getStyle(data.completed)} key={data.id} >
-            <input 
-            type="checkbox" 
-            defaultChecked={false} 
-            onChange={() => handleCompleteChange(data.id)} />
-              {data.title}
-            <button 
-            style={btnStyle}
-             onClick={() => clickDeleteButton(data.id)}
-            >
-              X
-            </button>
+          <div  key={data.id} >
+            <div className='flex items-center justify-between w-full px-4 py-1 my-2 text-gray-600 bg-gray-100 rounded'>
+              <div className='item-center'>
+              <input 
+              type="checkbox" 
+              onChange={() => handleCompleteChange(data.id)} 
+              defaultChecked={data.completed} 
+              />{" "}
+                <span className={data.completed ?'line-through': undefined}>{data.title}</span>
+              </div>
+                <div className='item-center'>
+                  <button className='px-4 py-2 float-right'
+                  onClick={() => clickDeleteButton(data.id)}
+                  >
+                    X
+                  </button>
+                </div>
+            </div>
           </div>
         ))}
 
