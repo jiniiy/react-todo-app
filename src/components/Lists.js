@@ -2,7 +2,7 @@ import React from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import List from "./List";
 
-const Lists = React.memo(({ todoData, setTodoData }) => {
+const Lists = React.memo(({ todoData, setTodoData, clickDeleteButton }) => {
   console.log("Lists Component");
   //const[todoData, setTodoData] = useState([]); 직접 부모state함수를가져오기보단,
 
@@ -34,6 +34,7 @@ const Lists = React.memo(({ todoData, setTodoData }) => {
                 >
                   {(provided, snapshot) => (
                     <List
+                      clickDeleteButton={clickDeleteButton}
                       key={data.id}
                       id={data.id}
                       title={data.title}

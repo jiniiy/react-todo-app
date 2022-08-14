@@ -1,8 +1,18 @@
 import React from "react";
 
 const List = React.memo(
-  ({ id, title, completed, todoData, setTodoData, provided, snapshot }) => {
+  ({
+    id,
+    title,
+    completed,
+    todoData,
+    setTodoData,
+    provided,
+    snapshot,
+    clickDeleteButton,
+  }) => {
     console.log("List Component");
+
     //체크박스에 체크넣기
     const handleCompleteChange = (id) => {
       let newTodoData = todoData.map((data) => {
@@ -15,14 +25,6 @@ const List = React.memo(
       //기존 할일 목록 리스트에 새로 넣어준 배열을 갱신해주기
       setTodoData(newTodoData);
       console.log("2" + newTodoData);
-    };
-
-    //X버튼 누르면 시행
-    const clickDeleteButton = (id) => {
-      //기존 할일 리스트에 배열 형태로 넣어주기
-      let newTodoData = todoData.filter((data) => data.id !== id);
-      console.log(newTodoData);
-      setTodoData(newTodoData);
     };
 
     return (

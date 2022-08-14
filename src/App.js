@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import "./App.css";
 import Lists from "./components/Lists";
 import Form from "./components/Form";
@@ -6,7 +6,20 @@ import Form from "./components/Form";
 export default function App() {
   console.log("App Component");
   const [todoData, setTodoData] = useState([]); //App 부모컴포넌트에서 todoData와 setTodoData두개의 props을 (List자식컴포넌트)내려준다.
+
   const [value, setValue] = useState("");
+
+  //X버튼 누르면 시행
+  const clickDeleteButton = useCallback(
+    //콜백함수 적용
+    (id) => {
+      //기존 할일 리스트에 배열 형태로 넣어주기
+      let newTodoData = todoData.filter((data) => data.id !== id);
+      console.log(newTodoData);
+      setTodoData(newTodoData);
+    },
+    [todoData] //콜백함수의 의존성배열 추가(참조하는 props가 있으므로!)
+  );
 
   const handleSubmit = (e) => {
     //form 안에 input을 전송할 때 페이지 리로드 되는 걸 막아줌.
@@ -30,7 +43,11 @@ export default function App() {
         <div className="bg-blue-200 flex justify-between mb-3">
           <h1>할 일 목록</h1>
         </div>
-        <Lists todoData={todoData} setTodoData={setTodoData} />
+        <Lists
+          clickDeleteButton={clickDeleteButton}
+          todoData={todoData}
+          setTodoData={setTodoData}
+        />
 
         <Form handleSubmit={handleSubmit} value={value} setValue={setValue} />
       </div>
