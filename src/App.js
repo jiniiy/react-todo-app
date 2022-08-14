@@ -37,11 +37,16 @@ export default function App() {
     setValue("");
   };
 
+  const clickDeleteAll = () => {
+    setTodoData([]);
+  };
+
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-red-300">
       <div className="bg-white selection:w-full p-6 m-4 rounded shadow lg:w-3/4 lg:max-w-lg">
         <div className="bg-blue-200 flex justify-between mb-3">
           <h1>할 일 목록</h1>
+          <button onClick={clickDeleteAll}>Delete All</button>
         </div>
         <Lists
           clickDeleteButton={clickDeleteButton}
