@@ -4,7 +4,8 @@ import Lists from "./components/Lists";
 import Form from "./components/Form";
 
 export default function App() {
-  const[todoData, setTodoData] = useState([]);  //App 부모컴포넌트에서 todoData와 setTodoData두개의 props을 (List자식컴포넌트)내려준다.
+  console.log("App Component");
+  const [todoData, setTodoData] = useState([]); //App 부모컴포넌트에서 todoData와 setTodoData두개의 props을 (List자식컴포넌트)내려준다.
   const [value, setValue] = useState("");
 
   const handleSubmit = (e) => {
@@ -13,8 +14,8 @@ export default function App() {
 
     //새로운 할 일 데이터
     let newTodo = {
-      id:Date.now(),
-      title:value,
+      id: Date.now(),
+      title: value,
       completed: false,
     };
 
@@ -22,18 +23,17 @@ export default function App() {
     setTodoData((prev) => [...prev, newTodo]);
     setValue("");
   };
- 
-    return(
-      <div className="flex items-center justify-center w-screen h-screen bg-red-300">
-        <div className="bg-white selection:w-full p-6 m-4 rounded shadow lg:w-3/4 lg:max-w-lg">
-          <div className="bg-blue-200 flex justify-between mb-3">
-            <h1>할 일 목록</h1>
-          </div>
-          <Lists todoData={todoData} setTodoData={setTodoData} />   
 
-          <Form handleSubmit={handleSubmit} value={value} setValue={setValue}  />
-           
+  return (
+    <div className="flex items-center justify-center w-screen h-screen bg-red-300">
+      <div className="bg-white selection:w-full p-6 m-4 rounded shadow lg:w-3/4 lg:max-w-lg">
+        <div className="bg-blue-200 flex justify-between mb-3">
+          <h1>할 일 목록</h1>
         </div>
+        <Lists todoData={todoData} setTodoData={setTodoData} />
+
+        <Form handleSubmit={handleSubmit} value={value} setValue={setValue} />
       </div>
-    );
+    </div>
+  );
 }

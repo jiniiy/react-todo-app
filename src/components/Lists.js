@@ -2,8 +2,8 @@ import React from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import List from "./List";
 
-//List컴포넌트를 의미.
-export default function Lists({ todoData, setTodoData }) {
+const Lists = React.memo(({ todoData, setTodoData }) => {
+  console.log("Lists Component");
   //const[todoData, setTodoData] = useState([]); 직접 부모state함수를가져오기보단,
 
   const handleEnd = (result) => {
@@ -53,4 +53,6 @@ export default function Lists({ todoData, setTodoData }) {
       </DragDropContext>
     </div>
   );
-}
+});
+
+export default Lists;
