@@ -17,6 +17,7 @@ const Lists = React.memo(({ todoData, setTodoData, clickDeleteButton }) => {
 
     newTodoData.splice(result.destination.index, 0, reorderItem); //splice메서드를 한번 더 이용해서, 지운 위치정보를 const [reorderItem]에 담아가져와서 원하는자리:0에 추가시켜줌.
     setTodoData(newTodoData);
+    localStorage.setItem("todoData", JSON.stringify(newTodoData));
   };
 
   return (

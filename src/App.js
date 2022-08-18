@@ -3,9 +3,14 @@ import "./App.css";
 import Lists from "./components/Lists";
 import Form from "./components/Form";
 
+//JSON.stringify(text)로 저장한 것을,이번엔,JSON.parse로 불러오기!
+const initialTodoData = localStorage.getItem("todoData")
+  ? JSON.parse(localStorage.getItem("todoData"))
+  : [];
+
 export default function App() {
   console.log("App Component");
-  const [todoData, setTodoData] = useState([]); //App 부모컴포넌트에서 todoData와 setTodoData두개의 props을 (List자식컴포넌트)내려준다.
+  const [todoData, setTodoData] = useState(initialTodoData); //App 부모컴포넌트에서 todoData와 setTodoData두개의 props을 (List자식컴포넌트)내려준다.
 
   const [value, setValue] = useState("");
 
@@ -17,6 +22,7 @@ export default function App() {
       let newTodoData = todoData.filter((data) => data.id !== id);
       console.log(newTodoData);
       setTodoData(newTodoData);
+      localStorage.setItem("todoData", JSON.stringify(newTodoData));
     },
     [todoData] //콜백함수의 의존성배열 추가(참조하는 props가 있으므로!)
   );
@@ -34,11 +40,15 @@ export default function App() {
 
     //본래 존재하던 할 일에 새로운 할 일 더해주기 업데이트 개념.
     setTodoData((prev) => [...prev, newTodo]);
+    localStorage.setItem("todoData", JSON.stringify([...todoData, newTodo]));
+
+    //입력란에 있던 글씨 지워주기
     setValue("");
   };
 
   const clickDeleteAll = () => {
     setTodoData([]);
+    localStorage.setItem("todoData", JSON.stringify([]));
   };
 
   return (

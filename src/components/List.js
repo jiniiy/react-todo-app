@@ -26,6 +26,7 @@ const List = React.memo(
       //기존 할일 목록 리스트에 새로 넣어준 배열을 갱신해주기
       setTodoData(newTodoData);
       console.log("2" + newTodoData);
+      localStorage.setItem("todoData", JSON.stringify(newTodoData));
     };
 
     const EditChangeText = (event) => {
@@ -43,6 +44,7 @@ const List = React.memo(
         return data;
       });
       setTodoData(newTodoData);
+      localStorage.setItem("todoData", JSON.stringify(newTodoData));
       setIsEditing(false);
     };
 
